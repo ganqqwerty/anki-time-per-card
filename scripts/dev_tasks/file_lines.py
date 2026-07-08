@@ -10,11 +10,8 @@ IGNORED_PARTS = {
     ".git",
     ".codegraph",
     ".mypy_cache",
-    ".pytest_cache",
     ".ruff_cache",
     "__pycache__",
-    "node_modules",
-    "web",
 }
 
 

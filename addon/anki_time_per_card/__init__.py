@@ -18,7 +18,7 @@ def _bootstrap() -> None:
         return
 
     try:
-        from .menu import register_hooks
+        from .reviewer_average import register_hooks
 
         register_hooks()
     except Exception as exc:  # pragma: no cover - defensive Anki import boundary

@@ -2,19 +2,19 @@
 
 The add-on uses a narrow Anki API surface:
 
-- `aqt.gui_hooks.profile_did_open` to install the Tools menu action after a profile opens
-- `aqt.mw` for the active main window and collection
-- `aqt.webview.AnkiWebView` for the Svelte dialog
-- `Collection.db.all(...)` for read-only `revlog` aggregation
+- `aqt.gui_hooks.webview_will_set_content` to inject the overlay into the reviewer WebView
+- `aqt.gui_hooks.reviewer_did_show_question`, `reviewer_did_show_answer`, and `reviewer_did_answer_card` to refresh the number during review
+- `aqt.mw.reviewer` for the active reviewer when hook arguments do not include it
+- `Collection.db.first(...)` for read-only `revlog` aggregation
 
-The review log query uses:
+The review log query follows Anki's studied-today stats path:
 
 ```sql
-select cid, time
+select count(), coalesce(sum(time), 0)
 from revlog
-where id >= ? and id < ?
+where type != 4
+  and id > ?
+  and cid in (select id from cards where did in <active deck ids>)
 ```
 
-`revlog.id` is treated as a millisecond timestamp. `revlog.time` is the answer time in milliseconds. The feature uses local calendar day bounds because the UI says "today".
-
-Keep direct Anki imports out of modules that should run in plain unit tests. Put reusable logic in import-safe modules and pass Anki objects in from the UI boundary.
+`revlog.id` is treated as a millisecond timestamp. `revlog.time` is the answer time in milliseconds. The lower bound is `(col.sched.day_cutoff - 86400) * 1000`, matching Anki's scheduler day boundary.

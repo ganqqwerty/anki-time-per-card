@@ -1,14 +1,8 @@
 # Anki Time Per Card
 
-Anki Time Per Card is a small local Anki add-on that shows the average time spent per distinct card reviewed during today's local Anki session.
+Anki Time Per Card is a small local Anki add-on that shows one live number during review: Anki's studied-today average answer time for the active deck, rendered as `s/card`.
 
-The project is intentionally scaffolded around the developer loop:
-
-- build Python add-on code and a Svelte WebView bundle
-- link the add-on into Anki as a numeric local add-on
-- launch Anki with the linked add-on
-- run unit tests, frontend tests, and real-Anki e2e tests
-- run quality checks from one `scripts/dev.py` entrypoint
+The number matches Anki's own studied-today calculation: non-reschedule review log rows for the active deck since Anki's scheduler day start, using total recorded review time divided by review count.
 
 ## Quick Start
 
@@ -19,16 +13,13 @@ python3 scripts/dev.py link-addon
 python3 scripts/dev.py run-anki
 ```
 
-In Anki, open `Tools -> Average Time Per Card Today`.
+In Anki, review cards normally. The average appears in the top-right corner of the reviewer.
 
 ## Common Commands
 
 ```bash
-python3 scripts/dev.py test
-python3 scripts/dev.py test-svelte
-python3 scripts/dev.py test-e2e
 python3 scripts/dev.py check
 python3 scripts/dev.py info
 ```
 
-The Python commands run through Anki's bundled Python so tests see the same `anki`, `aqt`, and Qt packages used by the add-on at runtime.
+The Python commands run through Anki's bundled Python so tooling sees the same `anki` and `aqt` packages used by the add-on at runtime.

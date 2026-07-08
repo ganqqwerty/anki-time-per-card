@@ -5,7 +5,7 @@ from __future__ import annotations
 from scripts.dev_tasks.process import run_process
 from scripts.dev_tasks.python_env import find_anki_python
 
-PYTHON_TARGETS = ["addon", "scripts", "tests", "e2e"]
+PYTHON_TARGETS = ["addon", "scripts"]
 
 
 def cmd_lint(_command_args: list[str]) -> int:

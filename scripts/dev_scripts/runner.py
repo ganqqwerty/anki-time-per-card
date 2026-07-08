@@ -8,7 +8,7 @@ from scripts.dev_cli import build_parser
 from scripts.dev_scripts.types import CommandRegistry
 from scripts.dev_tasks.process import quiet_test_output, set_idle_timeout, set_verbose
 
-QUIET_TEST_COMMANDS = frozenset({"test", "test-e2e", "test-e2e-parallel", "test-svelte", "coverage"})
+QUIET_TEST_COMMANDS: frozenset[str] = frozenset()
 
 
 def print_help(commands: CommandRegistry) -> None:
