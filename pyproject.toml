@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "anki-time-per-card"
+version = "0.1.0"
+description = "Local Anki add-on for today's average review time per card."
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+exclude = [
+  ".git",
+  ".codegraph",
+  "webview_ui/node_modules",
+  "addon/anki_time_per_card/web",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["B008"]
+
+[tool.mypy]
+python_version = "3.11"
+files = ["addon", "scripts", "tests", "e2e"]
+ignore_missing_imports = true
+check_untyped_defs = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+strict_optional = true
+exclude = "webview_ui|addon/anki_time_per_card/web"
+
+[tool.bandit]
+exclude_dirs = ["tests", "e2e", "webview_ui"]
+skips = ["B101"]
+
+[tool.coverage.run]
+branch = true
+source = ["addon/anki_time_per_card", "scripts"]
+omit = [
+  "addon/anki_time_per_card/web/*",
+  "e2e/*",
+  "tests/*",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+
+[tool.deptry]
+exclude = ["webview_ui", "addon/anki_time_per_card/web"]
+
+[tool.deptry.per_rule_ignores]
+DEP001 = ["anki", "aqt", "PyQt6", "pytest"]
+DEP002 = ["setuptools"]
+DEP003 = ["anki", "aqt", "PyQt6", "argcomplete", "pytest"]
