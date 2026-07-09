@@ -20,16 +20,16 @@ class AverageSnapshot:
     milliseconds: int
 
     @property
-    def seconds_per_card(self) -> int:
+    def seconds_per_card(self) -> float:
         if self.cards <= 0:
-            return 0
-        return round((self.milliseconds / 1000) / self.cards)
+            return 0.0
+        return round((self.milliseconds / 1000) / self.cards, 2)
 
     @property
     def display_text(self) -> str:
-        return f"{self.seconds_per_card}s/card"
+        return f"{self.seconds_per_card:.2f}s/card"
 
-    def to_payload(self) -> dict[str, int | str]:
+    def to_payload(self) -> dict[str, float | int | str]:
         return {
             "cards": self.cards,
             "milliseconds": self.milliseconds,
