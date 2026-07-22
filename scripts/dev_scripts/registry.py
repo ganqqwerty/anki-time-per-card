@@ -7,6 +7,7 @@ from collections.abc import Callable
 from scripts.dev_scripts.anki import cmd_info, cmd_run_anki
 from scripts.dev_scripts.check import cmd_check
 from scripts.dev_scripts.quality import cmd_deadcode, cmd_deps, cmd_quality_metrics, cmd_security
+from scripts.dev_scripts.testing import cmd_test
 from scripts.dev_scripts.tooling import cmd_lint, cmd_typecheck
 from scripts.dev_scripts.types import Command, CommandRegistry
 from scripts.dev_tasks.build import cmd_build
@@ -24,6 +25,7 @@ COMMANDS: CommandRegistry = {
     "link-addon": (no_args(cmd_link_addon), "Point Anki's local numeric add-on symlink at this checkout"),
     "run-anki": (cmd_run_anki, "Build Python, link this checkout add-on, and launch real Anki"),
     "build": (no_args(cmd_build), "Byte-compile the Python add-on and dev scripts"),
+    "test": (cmd_test, "Run daily-statistics and visualization unit tests"),
     "lint": (cmd_lint, "Run Ruff safe autofix, then formatting check"),
     "typecheck": (cmd_typecheck, "Run mypy type checker"),
     "file-lines": (no_args(cmd_file_lines), "Check Python file lengths"),

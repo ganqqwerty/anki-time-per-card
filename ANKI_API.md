@@ -3,9 +3,11 @@
 The add-on uses a narrow Anki API surface:
 
 - `aqt.gui_hooks.webview_will_set_content` to inject the overlay into the reviewer WebView
+- `aqt.gui_hooks.webview_did_inject_style_into_page` to append charts to the Svelte statistics page
 - `aqt.gui_hooks.reviewer_did_show_question`, `reviewer_did_show_answer`, and `reviewer_did_answer_card` to refresh the number during review
 - `aqt.mw.reviewer` for the active reviewer when hook arguments do not include it
 - `Collection.db.first(...)` for read-only `revlog` aggregation
+- `Collection.db.all(...)` for read-only daily `revlog` aggregation
 
 The review log query follows Anki's studied-today stats path:
 

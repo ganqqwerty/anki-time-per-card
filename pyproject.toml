@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "anki-time-per-card"
-version = "0.1.0"
+version = "0.1.1"
 description = "Local Anki add-on for today's average review time per card."
 requires-python = ">=3.11"
 dependencies = []

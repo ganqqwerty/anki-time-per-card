@@ -18,9 +18,11 @@ def _bootstrap() -> None:
         return
 
     try:
-        from .reviewer_average import register_hooks
+        from .reviewer_average import register_hooks as register_reviewer_hooks
+        from .stats_screen import register_hooks as register_stats_hooks
 
-        register_hooks()
+        register_reviewer_hooks()
+        register_stats_hooks()
     except Exception as exc:  # pragma: no cover - defensive Anki import boundary
         print(f"Anki Time Per Card failed to initialize: {exc}", file=sys.stderr)
 
